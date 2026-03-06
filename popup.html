@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Link Crawler Collector</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <main class="popup">
+      <h1>Link Crawler</h1>
+      <p class="subtitle">Collect links from the current tab.</p>
+
+      <label class="field">
+        <span>Pages to crawl</span>
+        <input id="maxPagesInput" type="number" min="1" max="20" value="3" />
+      </label>
+
+      <button id="crawlBtn">Crawl Current Page</button>
+      <p id="status" class="status"></p>
+
+      <div class="actions">
+        <button id="openHistoryBtn" class="secondary">Open History</button>
+      </div>
+    </main>
+    <script src="popup.js"></script>
+  </body>
+</html>

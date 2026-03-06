@@ -1,0 +1,24 @@
+{
+  "manifest_version": 3,
+  "name": "Link Crawler Collector",
+  "description": "Collects links from webpages and stores them for analysis.",
+  "version": "1.0.0",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "tabs",
+    "scripting",
+    "downloads"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "Link Crawler Collector",
+    "default_popup": "popup.html"
+  },
+  "options_page": "options.html"
+}

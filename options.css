@@ -1,0 +1,295 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #f8fafc;
+  color: #0f172a;
+  font-family: "Segoe UI", Tahoma, sans-serif;
+}
+
+.page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 10px;
+}
+
+h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.controls {
+  display: flex;
+  gap: 8px;
+}
+
+button {
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #0ea5e9;
+  color: #fff;
+}
+
+button:hover {
+  background: #0284c7;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+button.danger {
+  background: #ef4444;
+}
+
+button.danger:hover {
+  background: #dc2626;
+}
+
+.meta {
+  color: #475569;
+  margin: 0;
+  font-size: 14px;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  margin: 0 0 12px;
+}
+
+.filters {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.filters input,
+.filters select {
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #0f172a;
+  padding: 8px 10px;
+  font-size: 14px;
+}
+
+.filters input {
+  min-width: 320px;
+}
+
+.list {
+  display: grid;
+  gap: 12px;
+}
+
+.entry {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 12px;
+}
+
+.entry-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: flex-start;
+  margin: 0 0 8px;
+}
+
+.entry h2 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.entry .source-link {
+  display: inline-block;
+  margin: 0 0 10px;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #0369a1;
+  text-decoration: none;
+}
+
+.entry .source-link:hover {
+  text-decoration: underline;
+}
+
+.entry .details {
+  margin: 0;
+  color: #475569;
+  font-size: 14px;
+}
+
+.chips {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.chip {
+  border-radius: 999px;
+  padding: 4px 8px;
+  font-size: 12px;
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+.chip.jobs {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.entry-actions {
+  display: flex;
+  gap: 8px;
+  margin: 6px 0 0;
+}
+
+.entry-actions .action-btn {
+  font-size: 13px;
+  padding: 7px 10px;
+}
+
+.entry-actions .secondary {
+  background: #334155;
+}
+
+.entry-actions .secondary:hover {
+  background: #1e293b;
+}
+
+.f1-section {
+  margin-top: 10px;
+  padding: 10px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: #f8fafc;
+}
+
+.f1-section h3 {
+  margin: 0 0 6px;
+  font-size: 15px;
+}
+
+.links-box {
+  margin-top: 10px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.links-box summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 8px 10px;
+  background: #f8fafc;
+  color: #334155;
+  font-size: 13px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.links-box summary::-webkit-details-marker {
+  display: none;
+}
+
+.links-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 320px;
+  overflow: auto;
+}
+
+.links-list li {
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.links-list li:last-child {
+  border-bottom: none;
+}
+
+.link-row {
+  display: block;
+  padding: 8px 10px;
+  text-decoration: none;
+  color: #0f172a;
+}
+
+.link-row:hover {
+  background: #f8fafc;
+}
+
+.link-text {
+  display: block;
+  font-size: 13px;
+  margin: 0 0 2px;
+}
+
+.link-url {
+  display: block;
+  font-size: 12px;
+  color: #475569;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.muted {
+  color: #64748b;
+}
+
+.list-note {
+  padding: 8px 10px;
+}
+
+.empty {
+  color: #64748b;
+  text-align: center;
+  padding: 30px;
+  border: 1px dashed #cbd5e1;
+  border-radius: 10px;
+  background: #fff;
+}
+
+@media (max-width: 900px) {
+  .toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .filters {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .filters input {
+    min-width: 0;
+  }
+
+  .entry-header {
+    flex-direction: column;
+  }
+
+  .entry-actions {
+    flex-direction: column;
+  }
+}

@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Crawl History</title>
+    <link rel="stylesheet" href="options.css" />
+  </head>
+  <body>
+    <main class="page">
+      <header class="topbar">
+        <h1>Crawl History</h1>
+        <div class="controls">
+          <button id="exportBtn">Export JSON</button>
+          <button id="clearBtn" class="danger">Clear</button>
+        </div>
+      </header>
+      <section class="toolbar">
+        <p id="meta" class="meta"></p>
+        <div class="filters">
+          <input id="searchInput" type="search" placeholder="Search title, text, or URL" />
+          <select id="typeFilter">
+            <option value="all">All links</option>
+            <option value="jobs">Job links only</option>
+            <option value="internal">Internal only</option>
+            <option value="external">External only</option>
+          </select>
+        </div>
+      </section>
+      <section id="list" class="list"></section>
+    </main>
+    <script src="options.js"></script>
+  </body>
+</html>

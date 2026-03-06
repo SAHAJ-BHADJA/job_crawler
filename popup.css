@@ -1,0 +1,79 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, sans-serif;
+  background: #f8fafc;
+  color: #0f172a;
+}
+
+.popup {
+  width: 300px;
+  padding: 14px;
+}
+
+h1 {
+  margin: 0 0 6px;
+  font-size: 18px;
+}
+
+.subtitle {
+  margin: 0 0 12px;
+  color: #475569;
+  font-size: 13px;
+}
+
+.field {
+  display: grid;
+  gap: 6px;
+  margin-bottom: 12px;
+  font-size: 12px;
+  color: #334155;
+}
+
+.field input {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 13px;
+}
+
+button {
+  border: none;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+#crawlBtn {
+  width: 100%;
+  background: #0ea5e9;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+#crawlBtn:hover {
+  background: #0284c7;
+}
+
+.secondary {
+  width: 100%;
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+.status {
+  min-height: 18px;
+  margin: 10px 0 12px;
+  font-size: 12px;
+  color: #334155;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+}
