@@ -115,9 +115,12 @@ function renderEntry(entry) {
 
   const openEligibleBtn = document.createElement("button");
   openEligibleBtn.className = "action-btn secondary";
-  openEligibleBtn.textContent = "Open Eligible Tabs";
+  openEligibleBtn.textContent = "Open Shortlisted Tabs";
   const eligibleCount = entry.f1Analysis?.eligibleCount || 0;
-  openEligibleBtn.disabled = eligibleCount === 0;
+  const noSponsorCount = entry.f1Analysis?.noSponsorCount || 0;
+  const reviewCount = entry.f1Analysis?.reviewCount || 0;
+  const openCount = eligibleCount + noSponsorCount + reviewCount;
+  openEligibleBtn.disabled = openCount === 0;
   openEligibleBtn.addEventListener("click", async () => {
     const response = await chrome.runtime.sendMessage({
       type: "OPEN_F1_ELIGIBLE_TABS",

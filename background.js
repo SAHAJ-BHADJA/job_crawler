@@ -264,17 +264,22 @@ async function openEligibleTabsForEntry(entryId) {
   const entry = history.find((item) => item.id === entryId);
   if (!entry) throw new Error("Crawl session not found.");
 
-  const eligibleLinks = entry.f1Analysis?.eligibleLinks || [];
-  if (!eligibleLinks.length) {
-    throw new Error("No F1 eligible links found. Run analysis first.");
+  const analysis = entry.f1Analysis || {};
+  const eligibleLinks = Array.isArray(analysis.eligibleLinks) ? analysis.eligibleLinks : [];
+  const noSponsorLinks = Array.isArray(analysis.noSponsorLinks) ? analysis.noSponsorLinks : [];
+  const reviewLinks = Array.isArray(analysis.reviewLinks) ? analysis.reviewLinks : [];
+
+  const merged = dedupeByHref([...eligibleLinks, ...noSponsorLinks, ...reviewLinks]);
+  if (!merged.length) {
+    throw new Error("No links found in Eligible / No-Sponsor / Review. Run analysis first.");
   }
 
-  for (const link of eligibleLinks) {
+  for (const link of merged) {
     await createBackgroundTab(link.href);
     await sleep(120);
   }
 
-  return { openedTabs: eligibleLinks.length };
+  return { openedTabs: merged.length };
 }
 
 async function saveCrawlResult(payload) {
