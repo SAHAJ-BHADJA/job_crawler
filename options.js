@@ -156,13 +156,19 @@ function renderF1Section(entry) {
   summary.className = "details";
   summary.textContent =
     `${formatDate(analysis.analyzedAt)} | scanned: ${analysis.scannedLinks} | ` +
-    `eligible: ${analysis.eligibleCount} | rejected: ${analysis.rejectedCount} | failed: ${analysis.failedCount}`;
+    `eligible: ${analysis.eligibleCount || 0} | rejected: ${analysis.rejectedCount || 0} | ` +
+    `no-sponsor: ${analysis.noSponsorCount || 0} | review: ${analysis.reviewCount || 0} | failed: ${analysis.failedCount || 0}`;
   section.appendChild(summary);
 
-  const terms = document.createElement("p");
-  terms.className = "muted";
-  terms.textContent = `Rejected if page contains: ${(analysis.blockedTerms || []).join(", ")}`;
-  section.appendChild(terms);
+  const rejectTerms = document.createElement("p");
+  rejectTerms.className = "muted";
+  rejectTerms.textContent = `Rejected terms: ${(analysis.rejectTerms || []).join(", ")}`;
+  section.appendChild(rejectTerms);
+
+  const noSponsorTerms = document.createElement("p");
+  noSponsorTerms.className = "muted";
+  noSponsorTerms.textContent = `No-Sponsor terms: ${(analysis.noSponsorTerms || []).join(", ")}`;
+  section.appendChild(noSponsorTerms);
 
   const eligibleLinks = analysis.eligibleLinks || [];
   const eligibleBox = document.createElement("details");
@@ -172,6 +178,42 @@ function renderF1Section(entry) {
   eligibleBox.appendChild(eligibleSummary);
   eligibleBox.appendChild(renderSimpleLinks(eligibleLinks, "No eligible links found."));
   section.appendChild(eligibleBox);
+
+  const noSponsorLinks = analysis.noSponsorLinks || [];
+  const noSponsorBox = document.createElement("details");
+  noSponsorBox.className = "links-box";
+  const noSponsorSummary = document.createElement("summary");
+  noSponsorSummary.textContent = `No-Sponsor links (${noSponsorLinks.length})`;
+  noSponsorBox.appendChild(noSponsorSummary);
+  noSponsorBox.appendChild(renderMatchedLinks(noSponsorLinks, "No no-sponsor links."));
+  section.appendChild(noSponsorBox);
+
+  const reviewLinks = analysis.reviewLinks || [];
+  const reviewBox = document.createElement("details");
+  reviewBox.className = "links-box";
+  const reviewSummary = document.createElement("summary");
+  reviewSummary.textContent = `Review links (${reviewLinks.length})`;
+  reviewBox.appendChild(reviewSummary);
+  reviewBox.appendChild(renderSimpleLinks(reviewLinks, "No review links."));
+  section.appendChild(reviewBox);
+
+  const rejectedLinks = analysis.rejectedLinks || [];
+  const rejectedBox = document.createElement("details");
+  rejectedBox.className = "links-box";
+  const rejectedSummary = document.createElement("summary");
+  rejectedSummary.textContent = `Rejected links (${rejectedLinks.length})`;
+  rejectedBox.appendChild(rejectedSummary);
+  rejectedBox.appendChild(renderMatchedLinks(rejectedLinks, "No rejected links."));
+  section.appendChild(rejectedBox);
+
+  const failedLinks = analysis.failedLinks || [];
+  const failedBox = document.createElement("details");
+  failedBox.className = "links-box";
+  const failedSummary = document.createElement("summary");
+  failedSummary.textContent = `Failed links (${failedLinks.length})`;
+  failedBox.appendChild(failedSummary);
+  failedBox.appendChild(renderFailedLinks(failedLinks, "No failed links."));
+  section.appendChild(failedBox);
 
   return section;
 }
@@ -218,6 +260,52 @@ function renderSimpleLinks(links, emptyText) {
 
   for (const link of links) {
     list.appendChild(makeLinkRow(link.href, link.pageTitle || link.text));
+  }
+  return list;
+}
+
+function renderMatchedLinks(links, emptyText) {
+  const list = document.createElement("ul");
+  list.className = "links-list";
+  if (!links.length) {
+    const li = document.createElement("li");
+    li.className = "muted list-note";
+    li.textContent = emptyText;
+    list.appendChild(li);
+    return list;
+  }
+
+  for (const link of links) {
+    const li = makeLinkRow(link.href, link.pageTitle || link.text);
+    if (Array.isArray(link.matchedTerms) && link.matchedTerms.length) {
+      const reason = document.createElement("div");
+      reason.className = "link-url";
+      reason.textContent = `Matched: ${link.matchedTerms.join(", ")}`;
+      li.appendChild(reason);
+    }
+    list.appendChild(li);
+  }
+  return list;
+}
+
+function renderFailedLinks(links, emptyText) {
+  const list = document.createElement("ul");
+  list.className = "links-list";
+  if (!links.length) {
+    const li = document.createElement("li");
+    li.className = "muted list-note";
+    li.textContent = emptyText;
+    list.appendChild(li);
+    return list;
+  }
+
+  for (const link of links) {
+    const li = makeLinkRow(link.sourceHref || link.href, link.pageTitle || link.text);
+    const reason = document.createElement("div");
+    reason.className = "link-url";
+    reason.textContent = `Reason: ${link.error || "Unknown error"}`;
+    li.appendChild(reason);
+    list.appendChild(li);
   }
   return list;
 }

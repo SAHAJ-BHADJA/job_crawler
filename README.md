@@ -4,17 +4,20 @@ This extension crawls the current webpage, collects all links (`<a href>`), and 
 
 ## Features
 - Crawl links from the active tab
-- Multi-page crawl loop using `start` pagination (e.g. 0, 25, 50...)
+- Multi-page crawl loop with auto-detected pagination (`next`, `start`, `page`, `p`)
 - Save each crawl session with metadata:
   - page URL
   - page title
   - crawl time
   - pages crawled
   - total/internal/external link counts
-- Analyze job links for F1 suitability by rejecting pages containing:
-  - `US citizen`
-  - `citizenship required`
-  - `security clearance`
+- Analyze job links for F1 suitability with 4 outputs:
+  - `Eligible`
+  - `Rejected` (US citizen / citizenship required / security clearance)
+  - `No-Sponsor` (no visa sponsorship language)
+  - `Review` (no clear signal)
+- For LinkedIn job links, analysis targets the company external apply page URL (no LinkedIn fallback)
+- If no external apply URL is available, analyzer falls back to LinkedIn job description content
 - Store an `F1 eligible links` list per crawl session
 - Open all F1 eligible links in new tabs with one click
 - View crawl history in the options page
@@ -30,10 +33,9 @@ This extension crawls the current webpage, collects all links (`<a href>`), and 
 ## How to use
 1. Open any webpage.
 2. Click the extension icon.
-3. Set **Pages to crawl**.
-4. Click **Crawl Current Page**.
-5. Click **Open History** to review saved data.
-6. Use **Export JSON** for analysis.
+3. Click **Crawl Current Page**.
+4. Click **Open History** to review saved data.
+5. Use **Export JSON** for analysis.
 
 ## Storage
 Data is stored in `chrome.storage.local` under key `crawlHistory`.
